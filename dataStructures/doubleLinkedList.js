@@ -1,4 +1,4 @@
-import { push } from "core-js/core/array"
+import { pop, push } from "core-js/core/array"
 
 class Node {
     constructor(val) {
@@ -8,7 +8,7 @@ class Node {
     }
 }
 
-class DoublyLinkedList() {
+class DoublyLinkedList {
     constructor() {
         this.head = null
         this.tail = null
@@ -29,4 +29,15 @@ class DoublyLinkedList() {
         this.length++
         console.log(this)
     }
+
+    pop() {
+        let popped = this.tail
+        let newTail = popped.prev
+        popped.prev = null
+        this.tail = newTail
+        newTail.next = null
+        this.length --
+        return popped
+    }
+
 }
