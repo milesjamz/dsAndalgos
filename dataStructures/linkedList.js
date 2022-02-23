@@ -31,9 +31,20 @@ class SinglyLinkedList {
             while(nextNode.next) {
                 currNode = nextNode
             }
-
+            let poppedNode = nextNode
             this.tail = currNode
+            this.tail.next = null
+            this.length --
+            return poppedNode
     }
-    return curr
+
+    shift() {
+        if(!this.head) return undefined
+        let currNode = this.head
+        let nextNode = currNode.next
+        currNode.next = null
+        this.head = nextNode
+        this.length --
+        return currNode
     }
 }
