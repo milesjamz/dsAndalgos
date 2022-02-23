@@ -28,15 +28,20 @@ class SinglyLinkedList {
     pop() {
         if(!this.head) return undefined
             let currNode = this.head
-            let nextNode = currNode.next
-            while(nextNode.next) {
-                currNode = nextNode
+            let newTail = currNode
+            while(currNode.next) {
+                newTail = currNode
+                currNode = currNode.next
             }
-            let poppedNode = nextNode
-            this.tail = currNode
+            this.tail = newTail
             this.tail.next = null
             this.length --
-            return poppedNode
+            if (this.length === 0){
+                this.head = null
+                this.tail = null
+            }
+
+            return currNode
     }
 
     shift() {
@@ -70,11 +75,12 @@ class SinglyLinkedList {
             curr = curr.next
             counter ++
         }
+        console.log(curr)
         return curr
     }
 
     set(index,val) {
-        let foundNode = get(index)
+        let foundNode = this.get(index)
         if (foundNode) {
             foundNode.val = val
             return true
@@ -83,5 +89,53 @@ class SinglyLinkedList {
         }
     }
 
-    
+    insert(index,val) {
+        if(index < 0 || index > this.length) return false;
+        if(index === this.length) return !!this.push(val);
+        if(index === 0) return !!this.unshift(val);
+        let nodeBefore = this.get(index-1)
+        let newNode = new Node(val)
+        let nextNext = newBefore.next
+        nodeBefore.next = newNode
+        newNode.next = nextNext
+        this.length++
+        return true
+    }
+
+    remove(index) {
+        if (index < 0 || index > this.length) return false
+        if (index === this.length) return !!this.pop();
+        if (index === 0) return !!this.shift()
+        let nodeBefore = this.get(index-1)
+        let removed = nodeBefore.next
+        nodeBefore.next = removed.next
+        this.length --
+        return removed
+    }
+
+    reverse() {
+        if (this.length <= 1) return this
+        let currNode = this.head
+        this.head = this.tail
+        this.tail = currNode
+        let next
+        let prev = null
+        while(currNode) {
+            next = currNode.next
+            currNode.next = prev
+            prev = currNode
+            currNode = next
+        }
+        return this
+    }
+
+    print() {
+        let arr = []
+        let curr = this.head
+        while(curr) {
+            arr.push(curr.val)
+            curr = curr.next
+        }
+        console.log(arr)
+    }
 }
