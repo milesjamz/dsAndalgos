@@ -1,8 +1,3 @@
-//Singly linked list Data Structure
-//September 17 2021
-//More TK
-
-
 class Node {
     constructor(val){
         this.val = val
@@ -17,18 +12,28 @@ class SinglyLinkedList {
         this.length = null
     }
     push(val) {
+        let newNode = new Node(val)
         if(!this.head) {
-            this.head = val
+            this.head = newNode
+            this.tail = this.head
+        } else {
+            this.tail.next = newNode
+            this.tail = newNode
         }
+            this.length ++
+            return newNode
+    }
+
+    pop() {
+        if(!this.head) return undefined
+            let currNode = this.head
+            let nextNode = currNode.next
+            while(nextNode.next) {
+                currNode = nextNode
+            }
+
+            this.tail = currNode
+    }
+    return curr
     }
 }
-
-
-
-
-const linkedList = () => {
-    let result = ''
-    return result
-}
-
-let node = ''
