@@ -1,4 +1,4 @@
-import { pop, push } from "core-js/core/array"
+// import { pop, push } from "core-js/core/array"
 
 class Node {
     constructor(val) {
@@ -17,20 +17,21 @@ class DoublyLinkedList {
 
     push(val) {
         let newNode = new Node(val)
-        if (this.length = 0) {
+        if (!this.head) {
             this.head = newNode
             this.tail = this.head
         } else {
+            this.tail.next = newNode
             let oldTail = this.tail
-            oldTail.next = newNode
-            this.tail = oldTail.next
+            this.tail = newNode
             newNode.prev = oldTail
         }
         this.length++
-        console.log(this)
+        return this
     }
 
     pop() {
+        if (!this.head) return undefined
         let popped = this.tail
         let newTail = popped.prev
         popped.prev = null
