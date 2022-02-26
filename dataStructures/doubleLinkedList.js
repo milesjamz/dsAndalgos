@@ -70,4 +70,36 @@ class DoublyLinkedList {
         return this
     }
 
+    get(index) {
+        if(index < 0 || index > this.length) return null
+        let currNode, counter;
+        if (index < this.length / 2) {
+            counter = 0
+            courrNode = this.head
+            while (counter < index) {
+                currNode = currNode.next
+                counter ++
+            }
+        } else {
+            counter = this.length-1
+            currNode = this.tail
+            while (counter > index) {
+                currNode = currNode.prev
+                counter--
+            }
+        }
+        return currNode.val
+    }
+
+    set(index,val) {
+        let setNode = this.get(index)
+        if (setNode != null) {
+        this.val = val
+        return true
+        }
+        return false
+    }
+
+    
+
 }
