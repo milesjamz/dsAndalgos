@@ -100,6 +100,13 @@ class DoublyLinkedList {
         return false
     }
 
-    
+    insert(index,val) {
+        if( index < 0 || index > this.length) return null
+        if(index === 0) return !!this.unshift(val)
+        if(index === this.length) return !!this.push(val
+        
+        var newNode = new Node(val)
+    }
+
 
 }
